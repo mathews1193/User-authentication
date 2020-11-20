@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from "./fire";
+import Login from "./components/Login";
 import './App.css';
 import fire from './fire';
 
@@ -69,14 +70,14 @@ const handleLogout = () =>{
 
 // check to see if user is logged in 
 const authListener = () =>{
-  fire.auth().onAuthStateChanged(user => {
+  fire.auth().onAuthStateChanged((user) => {
     if(user){
       clearInputs();
       setUser(user);
     }else {
       setUser('');
     }
-  })
+  });
 };
 
 useEffect(() =>{
@@ -86,6 +87,19 @@ useEffect(() =>{
   return (
     <div className="App">
       <h1>Login Using Firebase</h1> 
+
+      <Login 
+        email={email} 
+        setEmail={setEmail} 
+        password={password} 
+        setPassword={setPassword} 
+        handleLogin={handleLogin}
+        handleSignup={handleSignup}
+        hasAccount={hasAccount}
+        setHasAccount={setHasAccount}
+        emailError={emailError}
+        passwordError={passwordError}
+      />
     </div>
   );
 }
