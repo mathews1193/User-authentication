@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import firebase from "./fire";
 import Login from "./components/Login";
+import Hero from "./components/Hero";
 import './App.css';
 import fire from './fire';
 
@@ -99,6 +100,10 @@ useEffect(() =>{
         setHasAccount={setHasAccount}
         emailError={emailError}
         passwordError={passwordError}
+      />
+
+      <Hero 
+      handleLogout={handleLogout}
       />
     </div>
   );
