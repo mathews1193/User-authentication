@@ -31,7 +31,8 @@ const handleLogin = () =>{
   firebase
     .auth()
     .signInWithEmailAndPassword(email,password)
-    .catch(err =>{
+    .catch((err) =>{
+      // eslint-disable-next-line default-case
       switch(err.code){
         case "auth/invalid-email":
           case "auth/user-disabled":
@@ -51,7 +52,8 @@ const handleSignup = () =>{
   firebase
     .auth()
     .createUserWithEmailAndPassword(email,password)
-    .catch(err =>{
+    .catch((err) =>{
+      // eslint-disable-next-line default-case
       switch(err.code){
         case "auth/email-already-in-use":
           case "auth/invalid-email":
@@ -66,7 +68,8 @@ const handleSignup = () =>{
 
 //logout user 
 const handleLogout = () =>{
-  firebase.auth.signOut();
+  alert("Logging out now....");
+  firebase.auth().signOut();
 };
 
 // check to see if user is logged in 
@@ -89,22 +92,22 @@ useEffect(() =>{
     <div className="App">
       <h1>Login Using Firebase</h1> 
 
-      <Login 
-        email={email} 
-        setEmail={setEmail} 
-        password={password} 
-        setPassword={setPassword} 
-        handleLogin={handleLogin}
-        handleSignup={handleSignup}
-        hasAccount={hasAccount}
-        setHasAccount={setHasAccount}
-        emailError={emailError}
-        passwordError={passwordError}
-      />
-
-      <Hero 
-      handleLogout={handleLogout}
-      />
+      {user ? (
+        <Hero handleLogout={handleLogout}/>
+      ) : (
+        <Login 
+          email={email} 
+          setEmail={setEmail} 
+          password={password} 
+          setPassword={setPassword} 
+          handleLogin={handleLogin}
+          handleSignup={handleSignup}
+          hasAccount={hasAccount}
+          setHasAccount={setHasAccount}
+          emailError={emailError}
+          passwordError={passwordError}
+        />
+     )}
     </div>
   );
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Hero = (handleLogOut) => {
+const Hero = (props) => {
+    const { handleLogout } = props;
     return (
        <section className="hero">
            <nav>
                <h2>Welcome</h2>
-               <button onclick={handleLogOut}>LogOut</button>
+               <button onClick={handleLogout}>LogOut</button>
            </nav>
        </section>
     )
